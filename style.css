@@ -8,6 +8,10 @@
    box-sizing: border-box;
 }
 
+html{
+    font-size: 93.75%;
+}
+
 body{
     background: #f0f2f5;
     font-family: 'Poppins', sans-serif;
@@ -31,6 +35,28 @@ body{
     margin: auto;
 }
 
+h2{
+    margin-top: 3.2rem;
+    margin-bottom: 0.8rem;
+    color: var(--dark-blue);
+
+    font-weight: normal;
+}
+
+a{
+    color: #49aa26;
+    text-decoration: none;
+}
+
+.button.new{
+    display: inline-block;
+    margin-bottom: .8rem;
+}
+
+a:hover{
+    color: #3dd705;
+}
+
 header{
     background: #2d4a22;
     padding: 2rem 0rem 10rem;
@@ -40,14 +66,6 @@ header{
 #logo{
     color: white;
     font-weight: 100;
-}
-
-h2{
-    margin-top: 3.2rem;
-    margin-bottom: 0.8rem;
-    color: var(--dark-blue);
-
-    font-weight: normal;
 }
 
 #balance{
@@ -89,15 +107,23 @@ h2{
 }
 
 #data-table{
+    display: block;
     width: 100%;
     border-spacing: 0 0.5rem;
     color: #969cb3;
+
+    overflow-x: auto;
 }
 
 
 table thead tr th:first-child,
 table tbody tr td:first-child{
     border-radius: 0.25rem 0 0 0.25rem;
+}
+
+table thead tr th:last-child,
+table tbody tr td:last-child{
+    border-radius: 0 0.25rem 0.25rem 0;
 }
 
 table th{
@@ -141,3 +167,19 @@ footer{
     opacity: 0.6;
 }
 
+/* responsive */
+
+@media (min-width: 800px){
+    html{
+        font-size: 87.5%;
+    }
+
+    #balance{
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        /* dividiu as colunas em três e ajustou em uma fração pra cada */
+        gap: 2rem;
+    }
+
+
+}
