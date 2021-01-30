@@ -48,15 +48,28 @@ const Transaction = {
 }
 
 const DOM = {
-    innerHTMLTransaction(){
-        const html = `
-        <tr>
-            <td class="description">Luz</td>
-            <td class="expense">- R$ 500,00</td>
-            <td class="date">23/01/2021</td>
+    transactionsContainer: document.querySelector('#data-table tbody'),
+
+    addTransaction(trasaction, index){
+        
+        const tr = document.createElement('tr')
+        tr.innerHTML = DOM.innerHTMLTransaction(transaction)
+        DOM.transactionsContainer.appendChild(tr)
+       
+    },
+    innerHTMLTransaction(transaction){
+        const html = `       
+            <td class="description">${transaction.description}</td>
+            <td class="expense">${transaction.amount}</td>
+            <td class="${transaction.date}">23/01/2021</td>
             <td>
             <img src="/assets/minus.svg" alt="Remover Transação" />
-            </td>
-        </tr>      
-    `}
+            </td>       
+    `
+    return html
+    }
 }
+
+DOM.addTransaction(transactions[0])
+DOM.addTransaction(transactions[1])
+DOM.addTransaction(transactions[2])
