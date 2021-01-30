@@ -13,7 +13,7 @@ const Modal = {
     }
 }
 
-const transaction = [
+const transactions = [
     {
         id: 1,
         description: 'Luz',
@@ -34,7 +34,6 @@ const transaction = [
     }
 ]
 
-
 const Transaction = {
     incomes(){
         // somar as entradas
@@ -46,4 +45,18 @@ const Transaction = {
     total(){
         //calcular o total 
     }
+}
+
+const DOM = {
+    innerHTMLTransaction(){
+        const html = `
+        <tr>
+            <td class="description">Luz</td>
+            <td class="expense">- R$ 500,00</td>
+            <td class="date">23/01/2021</td>
+            <td>
+            <img src="/assets/minus.svg" alt="Remover Transação" />
+            </td>
+        </tr>      
+    `}
 }
