@@ -29,21 +29,49 @@ const transactions = [
     {
         id: 3,
         description: 'Internet',
-        amount: 20000,
+        amount: -20000,
+        date: '23/01/2021'
+    },
+    {
+        id: 4,
+        description: 'App',
+        amount: 200000,
         date: '23/01/2021'
     }
 ]
 
 const Transaction = {
-    incomes(){
-        // somar as entradas
+    all: transactions,
+    add(transaction){
+        transaction.all.push()
+    },
 
+    incomes(){
+        let income = 0;
+
+        transactions.all.forEach(transaction => {
+            if(transaction.amount > 0) {
+                income += transaction.amount;
+            }
+        })
+
+        return income
     },
+
     expenses(){
-        // somar as saidas
+        let expense = 0;
+
+        transactions.all.forEach(transaction => {
+            if(transaction.amount < 0) {
+                expense += transaction.amount;
+            }
+        })
+        
+        return expense
     },
+
     total(){
-        //calcular o total 
+       return Transaction.incomes() + Transaction.expenses()
     }
 }
 
@@ -57,6 +85,7 @@ const DOM = {
         DOM.transactionsContainer.appendChild(tr)
        
     },
+
     innerHTMLTransaction(transaction){
         const CSSclass = transaction.amount > 0 ? "income" : "expense"
 
@@ -64,22 +93,50 @@ const DOM = {
 
         const html = `       
             <td class="description">${transaction.description}</td>
-            <td class="${CSSclass}">${transaction.amount}</td>
+            <td class="${CSSclass}">${amount}</td>
             <td class="date">${transaction.date}</td>
             <td>
             <img src="/assets/minus.svg" alt="Remover Transação" />
             </td>       
     `
     return html
+    },
+
+    updateBalance(){
+        document
+            .getElementById('incomeDisplay')
+            .innerHTML = Utils.formatCurrency(Transaction.incomes())
+        
+        document
+            .getElementById('expenseDisplay')
+            .innerHTML = Utils.formatCurrency(Transaction.expenses())
+
+        document
+            .getElementById('totalDisplay')
+            .innerHTML = Utils.formatCurrency(Transaction.total())
     }
 }
 
 const Utils = {
     formatCurrency(value){
        const signal = Number(value) < 0 ? "-" : ""
+
+       value = String(value).replace(/\D/g, "")
+
+       value = Number(value) / 100
+
+       value = value.toLocaleString("pt-BR", {
+           style: "currency",
+           currency: "BRL"
+       })
+
+       return signal + value
     }
+    
 }
 
 transactions.forEach(function(transaction) {
     DOM.addTransaction(transaction)
 })
+
+DOM.updateBalance()
