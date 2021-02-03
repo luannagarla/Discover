@@ -7,29 +7,21 @@ const Modal = {
   },
 };
 
+const Storage = {
+  get() {
+    return JSON.parse(localStorage.getItem("dev.finances:transactions")) || [];
+  },
+
+  set(transactions) {
+    localStorage.setItem(
+      "dev.finances:transactions",
+      JSON.stringify(transactions)
+    );
+  },
+};
+
 const Transaction = {
-  all: [
-    {
-      description: "Luz",
-      amount: -50000,
-      date: "23/01/2021",
-    },
-    {
-      description: "Website",
-      amount: 500000,
-      date: "23/01/2021",
-    },
-    {
-      description: "Internet",
-      amount: -20000,
-      date: "23/01/2021",
-    },
-    {
-      description: "App",
-      amount: 200000,
-      date: "23/01/2021",
-    },
-  ],
+  all: Storage.get(),
 
   add(transaction) {
     Transaction.all.push(transaction);
@@ -79,7 +71,7 @@ const DOM = {
     const tr = document.createElement("tr");
     tr.innerHTML = DOM.innerHTMLTransaction(transaction, index);
 
-    tr.dataset.index = index
+    tr.dataset.index = index;
 
     DOM.transactionsContainer.appendChild(tr);
   },
@@ -187,9 +179,9 @@ const Form = {
   },
 
   clearFields() {
-    Form.description.value = " "
-    Form.amount.value = " "
-    Form.date.value = " "
+    Form.description.value = " ";
+    Form.amount.value = " ";
+    Form.date.value = " ";
   },
 
   submit(event) {
@@ -208,8 +200,8 @@ const Form = {
     } catch (error) {
       alert(error.message);
     }
-  }
-}
+  },
+};
 
 const App = {
   init() {
@@ -218,6 +210,8 @@ const App = {
     });
 
     DOM.updateBalance();
+
+    Storage.set(Transaction.all);
   },
 
   reload() {
@@ -227,5 +221,3 @@ const App = {
 };
 
 App.init();
-
-
