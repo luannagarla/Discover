@@ -252,7 +252,7 @@ input{
     width: 100%;
 }
 
-.input-group{
+.input-group .help{
     margin-top: .8rem;
 }
 
